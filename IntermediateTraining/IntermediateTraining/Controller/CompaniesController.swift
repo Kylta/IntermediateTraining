@@ -8,16 +8,24 @@
 
 import UIKit
 
-class CompaniesController: UITableViewController {
+class CompaniesController: UITableViewController, CreateCompanyControllerDelegate {
+
+    func didAddCompany(company: Company) {
+        companies.append(company)
+        
+        let lastElement = companies.count - 1
+        let newIndexPath = IndexPath(row: lastElement, section: 0)
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
+    }
     
     let cellId = "cellId"
     
-    let companies = [
+    var companies = [
         Company(name: "Apple", founded: Date()),
         Company(name: "Google", founded: Date()),
         Company(name: "Facebook", founded: Date()),
         ]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,9 +44,10 @@ class CompaniesController: UITableViewController {
         print("Adding company...")
         
         let createCompanyController = CreateCompanyController()
-//        createCompanyController.view.backgroundColor = .green
         
         let navBarController = CustomNavigationController(rootViewController: createCompanyController)
+        
+        createCompanyController.delegate = self
         
         present(navBarController, animated: true, completion: nil)
     }
@@ -72,4 +81,5 @@ class CompaniesController: UITableViewController {
     }
     
 }
+
 
