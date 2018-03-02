@@ -8,9 +8,15 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+class CompaniesController: UITableViewController {
     
     let cellId = "cellId"
+    
+    let companies = [
+        Company(name: "Apple", founded: Date()),
+        Company(name: "Google", founded: Date()),
+        Company(name: "Facebook", founded: Date()),
+        ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,9 +29,18 @@ class ViewController: UITableViewController {
         tableView.separatorColor = .white
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
-        
-        setupNavigationStyle()
 
+    }
+    
+    @objc func handleAddCompany() {
+        print("Adding company...")
+        
+        let createCompanyController = CreateCompanyController()
+//        createCompanyController.view.backgroundColor = .green
+        
+        let navBarController = CustomNavigationController(rootViewController: createCompanyController)
+        
+        present(navBarController, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -39,7 +54,7 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return companies.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -47,24 +62,13 @@ class ViewController: UITableViewController {
         
         cell.backgroundColor = .tealColor
         
-        cell.textLabel?.text = "THE COMPANY NAME"
+        let company = companies[indexPath.row]
+        
+        cell.textLabel?.text = company.name
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         
         return cell
-    }
-    
-    func setupNavigationStyle() {
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.barTintColor = .lightRed
-        
-        let whiteTextColor = [NSAttributedStringKey.foregroundColor : UIColor.white]
-        navigationController?.navigationBar.titleTextAttributes = whiteTextColor
-        navigationController?.navigationBar.largeTitleTextAttributes = whiteTextColor
-    }
-    
-    @objc func handleAddCompany() {
-        print("Adding company...")
     }
     
 }
