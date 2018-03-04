@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class CompaniesController: UITableViewController, CreateCompanyControllerDelegate {
 
@@ -20,14 +21,12 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
     
     let cellId = "cellId"
     
-    var companies = [
-        Company(name: "Apple", founded: Date()),
-        Company(name: "Google", founded: Date()),
-        Company(name: "Facebook", founded: Date()),
-        ]
+    var companies = [Company]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchCompanies()
         
         navigationItem.title = "Companies"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus"), style: .plain, target: self, action: #selector(handleAddCompany))
@@ -38,6 +37,31 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
 
+    }
+    
+    private func fetchCompanies() {
+        // Attemps my core data fetch somehow...
+        let persistentContainer = NSPersistentContainer(name: "IntermediateTrainingModels")
+        persistentContainer.loadPersistentStores { (storeDescription, error) in
+            if let err = error {
+                fatalError("Loading of store failed: \(err)")
+            }
+        }
+        
+        let context = persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
+        
+        do {
+            let companies = try context.fetch(fetchRequest)
+            
+            companies.forEach({ (company) in
+                print(company.name ?? "")
+            })
+            
+        } catch let fetchErr {
+            print("Failed to fetch companies:", fetchErr)
+        }
     }
     
     @objc func handleAddCompany() {
