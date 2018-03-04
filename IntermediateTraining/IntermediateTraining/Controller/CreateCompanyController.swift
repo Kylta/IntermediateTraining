@@ -12,9 +12,16 @@ import CoreData
 // Custom delegation
 protocol CreateCompanyControllerDelegate {
     func didAddCompany(company: Company)
+    func didEditCompany(company: Company)
 }
 
 class CreateCompanyController: UIViewController {
+    
+    var company: Company? {
+        didSet {
+            nameTextField.text = company?.name
+        }
+    }
     
     var delegate: CreateCompanyControllerDelegate?
     
@@ -39,11 +46,16 @@ class CreateCompanyController: UIViewController {
         return textField
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationItem.title = company == nil ? "Create Company" : "Edit Company"
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.title = "Create Company"
-        
+
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave))
@@ -55,7 +67,30 @@ class CreateCompanyController: UIViewController {
     }
     
     @objc func handleSave() {
-
+        
+        company == nil ? createCompany() : saveCompanyChanges()
+    }
+    
+    fileprivate func saveCompanyChanges() {
+        
+        let context = CoreDataManager.shared.persistentContrainer.viewContext
+        
+        company?.name = nameTextField.text
+        
+        do {
+            try context.save()
+            
+            // Save succeeded
+            dismiss(animated: true, completion: {
+                self.delegate?.didEditCompany(company: self.company!)
+            })
+            
+        } catch let saveErr {
+            print("Failed to save company changes", saveErr)
+        }
+    }
+    
+    fileprivate func createCompany() {
         let context = CoreDataManager.shared.persistentContrainer.viewContext
         
         let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context)
