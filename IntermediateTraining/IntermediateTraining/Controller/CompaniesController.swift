@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 
 class CompaniesController: UITableViewController, CreateCompanyControllerDelegate {
+    
     func didEditCompany(company: Company) {
         
         let row = companies.index(of: company)
@@ -55,11 +56,8 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
         do {
             let companies = try context.fetch(fetchRequest)
             
-            companies.forEach({ (company) in
-                print(company.name ?? "")
-            })
+            companies.forEach { print($0.name ?? ""); self.companies.append($0) }
             
-            self.companies = companies
             self.tableView.reloadData()
             
         } catch let fetchErr {
@@ -88,7 +86,6 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
         editAction.backgroundColor = .darkBlue
         
         return [deleteAction, editAction]
-        
     }
     
     private func editHandlerFunction(action: UITableViewRowAction, indexPath: IndexPath) {
@@ -100,7 +97,6 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
         let navController = CustomNavigationController(rootViewController: editCompanyController)
         
         present(navController, animated: true, completion: nil)
-        
     }
     
     private func deleteHandlerFunction(action: UITableViewRowAction, indexPath: IndexPath) {
@@ -121,7 +117,6 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
         } catch let saveErr {
             print("Failed to delete company", saveErr)
         }
-        
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -145,7 +140,20 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
         
         let company = companies[indexPath.row]
         
-        cell.textLabel?.text = company.name
+        if let name = company.name, let founded = company.founded {
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+            
+            let foundedDateString = dateFormatter.string(from: founded)
+            
+            let dateString = "\(name) - Founded: \(foundedDateString)"
+        
+            cell.textLabel?.text = dateString
+        } else {
+            cell.textLabel?.text = company.name
+        }
+        
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         
