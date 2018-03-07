@@ -141,14 +141,11 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
         let company = companies[indexPath.row]
         
         if let name = company.name, let founded = company.founded {
-            
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMM dd, yyyy"
-            
             let foundedDateString = dateFormatter.string(from: founded)
-            
             let dateString = "\(name) - Founded: \(foundedDateString)"
-        
+            
             cell.textLabel?.text = dateString
         } else {
             cell.textLabel?.text = company.name
@@ -156,6 +153,12 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
         
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        
+        cell.imageView?.image = #imageLiteral(resourceName: "select_photo_empty")
+        
+        if let imageData = company.imageData {
+            cell.imageView?.image = UIImage(data: imageData)
+        }
         
         return cell
     }
