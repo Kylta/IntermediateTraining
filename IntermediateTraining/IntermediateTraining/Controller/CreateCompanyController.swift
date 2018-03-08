@@ -52,7 +52,6 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         print("Trying to select photo...")
         
         let imagePickerController = UIImagePickerController()
-        
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
         
@@ -73,11 +72,8 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
-            
             companyImageView.image = editedImage
-            
         } else if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            
             companyImageView.image = originalImage
         }
         
@@ -121,12 +117,10 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave))
         
         view.backgroundColor = .darkBlue
-        
         setupUI()
     }
     
     @objc func handleSave() {
-        
         company == nil ? createCompany() : saveCompanyChanges()
     }
     
@@ -142,12 +136,10 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         
         do {
             try context.save()
-            
             // Save succeeded
             dismiss(animated: true, completion: {
                 self.delegate?.didEditCompany(company: self.company!)
             })
-            
         } catch let saveErr {
             print("Failed to save company changes", saveErr)
         }
@@ -164,7 +156,6 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         guard let companyImage = companyImageView.image else { return }
         let imageData = UIImageJPEGRepresentation(companyImage, 0.8)
         company.setValue(imageData, forKey: "imageData")
-        
         // Perform the save
         do {
             try context.save()
@@ -173,7 +164,6 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
             dismiss(animated: true, completion: {
                 self.delegate?.didAddCompany(company: company as! Company)
             })
-            
         } catch let saveErr {
             print("Failed to save company: ", saveErr)
         }
