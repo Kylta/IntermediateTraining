@@ -10,6 +10,14 @@ import UIKit
 
 extension CompaniesController {
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let company = companies[indexPath.row]
+        let employeesController = EmployeesController()
+        employeesController.company = company
+        navigationController?.pushViewController(employeesController, animated: true)
+    }
+    
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let label = UILabel()
         label.text = "No companies available..."

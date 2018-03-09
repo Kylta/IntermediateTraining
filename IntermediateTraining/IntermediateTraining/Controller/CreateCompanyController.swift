@@ -112,7 +112,7 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
+        setupCancelButton()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave))
         
@@ -167,10 +167,6 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         } catch let saveErr {
             print("Failed to save company: ", saveErr)
         }
-    }
-    
-    @objc func handleCancel() {
-        dismiss(animated: true, completion: nil)
     }
     
     private func setupUI() {

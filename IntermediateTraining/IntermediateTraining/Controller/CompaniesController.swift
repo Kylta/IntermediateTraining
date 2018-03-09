@@ -21,14 +21,12 @@ class CompaniesController: UITableViewController {
         self.companies = CoreDataManager.shared.fetchCompanies()
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset))
-        
         navigationItem.title = "Companies"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus"), style: .plain, target: self, action: #selector(handleAddCompany))
+        setupPlusButtonInNavBar(selector: #selector(handleAddCompany))
         
         tableView.backgroundColor = .darkBlue
         tableView.tableFooterView = UIView()
         tableView.separatorColor = .white
-        
         tableView.register(CompanyCell.self, forCellReuseIdentifier: cellId)
 
     }
