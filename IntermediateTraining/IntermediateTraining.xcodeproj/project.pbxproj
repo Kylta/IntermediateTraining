@@ -15,7 +15,6 @@
 		46832186204945A5003E1719 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46832185204945A5003E1719 /* Assets.xcassets */; };
 		46832189204945A5003E1719 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46832187204945A5003E1719 /* LaunchScreen.storyboard */; };
 		4683219320494D93003E1719 /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4683219220494D93003E1719 /* UIColor+theme.swift */; };
-		4683219A2049570D003E1719 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468321992049570D003E1719 /* Company.swift */; };
 		468EBFFE2051681B0085BEF3 /* CompanyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468EBFFD2051681B0085BEF3 /* CompanyCell.swift */; };
 		468EC000205172910085BEF3 /* CompaniesController+CreateCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468EBFFF205172910085BEF3 /* CompaniesController+CreateCompany.swift */; };
 		468EC002205174980085BEF3 /* CompaniesController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468EC001205174980085BEF3 /* CompaniesController+UITableView.swift */; };
@@ -35,7 +34,6 @@
 		46832188204945A5003E1719 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4683218A204945A5003E1719 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4683219220494D93003E1719 /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
-		468321992049570D003E1719 /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		468EBFFD2051681B0085BEF3 /* CompanyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCell.swift; sourceTree = "<group>"; };
 		468EBFFF205172910085BEF3 /* CompaniesController+CreateCompany.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompaniesController+CreateCompany.swift"; sourceTree = "<group>"; };
 		468EC001205174980085BEF3 /* CompaniesController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompaniesController+UITableView.swift"; sourceTree = "<group>"; };
@@ -118,7 +116,6 @@
 		468321962049568D003E1719 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				468321992049570D003E1719 /* Company.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -217,7 +214,6 @@
 				4683217F204945A5003E1719 /* AppDelegate.swift in Sources */,
 				46681CF7204C0905009547B3 /* IntermediateTrainingModels.xcdatamodeld in Sources */,
 				46B881AC204C449000EB8872 /* CoreDataManager.swift in Sources */,
-				4683219A2049570D003E1719 /* Company.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

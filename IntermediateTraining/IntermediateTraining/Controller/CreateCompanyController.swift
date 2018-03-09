@@ -32,13 +32,6 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
     
     var delegate: CreateCompanyControllerDelegate?
     
-    let lightBackgroundView: UIView = {
-        let uv = UIView()
-        uv.backgroundColor = .lightBlue
-        uv.translatesAutoresizingMaskIntoConstraints = false
-        return uv
-    }()
-    
     lazy var companyImageView: UIImageView = {
         let iv = UIImageView(image: #imageLiteral(resourceName: "select_photo_empty"))
         iv.contentMode = .scaleAspectFill
@@ -89,18 +82,18 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         return label
     }()
     
-    let datePicker: UIDatePicker = {
-        let dp = UIDatePicker()
-        dp.datePickerMode = .date
-        dp.translatesAutoresizingMaskIntoConstraints = false
-        return dp
-    }()
-    
     let nameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter name"
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
+    }()
+    
+    let datePicker: UIDatePicker = {
+        let dp = UIDatePicker()
+        dp.datePickerMode = .date
+        dp.translatesAutoresizingMaskIntoConstraints = false
+        return dp
     }()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -114,13 +107,14 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
 
         setupCancelButton()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave))
+        setupSaveInNavBar(selector: #selector(handleSave))
         
         view.backgroundColor = .darkBlue
         setupUI()
     }
     
-    @objc func handleSave() {
+    @objc private func handleSave() {
+
         company == nil ? createCompany() : saveCompanyChanges()
     }
     
@@ -147,19 +141,19 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
     
     fileprivate func createCompany() {
         let context = CoreDataManager.shared.persistentContrainer.viewContext
-        
+
         let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context)
-        
+
         company.setValue(nameTextField.text, forKey: "name")
         company.setValue(datePicker.date, forKey: "founded")
-        
+
         guard let companyImage = companyImageView.image else { return }
         let imageData = UIImageJPEGRepresentation(companyImage, 0.8)
         company.setValue(imageData, forKey: "imageData")
         // Perform the save
         do {
             try context.save()
-            
+
             // Success
             dismiss(animated: true, completion: {
                 self.delegate?.didAddCompany(company: company as! Company)
@@ -171,11 +165,7 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
     
     private func setupUI() {
         
-        view.addSubview(lightBackgroundView)
-        lightBackgroundView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        lightBackgroundView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        lightBackgroundView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        lightBackgroundView.heightAnchor.constraint(equalToConstant: 350).isActive = true
+        let lightBlueBackgroundView = setupLightBlueBackgroundView(height: 350)
         
         view.addSubview(companyImageView)
         companyImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 8).isActive = true
@@ -198,7 +188,7 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         view.addSubview(datePicker)
         datePicker.topAnchor.constraint(equalTo: nameLabel.bottomAnchor).isActive = true
         datePicker.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        datePicker.bottomAnchor.constraint(equalTo: lightBackgroundView.bottomAnchor).isActive = true
+        datePicker.bottomAnchor.constraint(equalTo: lightBlueBackgroundView.bottomAnchor).isActive = true
         datePicker.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
     
