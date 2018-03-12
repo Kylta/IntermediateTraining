@@ -53,6 +53,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		462B0C87205542F800072F3C /* Company */ = {
+			isa = PBXGroup;
+			children = (
+				462B0C8A2055432E00072F3C /* Model */,
+				462B0C892055432800072F3C /* View */,
+				462B0C882055432200072F3C /* Controller */,
+			);
+			path = Company;
+			sourceTree = "<group>";
+		};
+		462B0C882055432200072F3C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				46832180204945A5003E1719 /* CompaniesController.swift */,
+				46E3463120495B59003D60C9 /* CreateCompanyController.swift */,
+				468EC001205174980085BEF3 /* CompaniesController+UITableView.swift */,
+				468EBFFF205172910085BEF3 /* CompaniesController+CreateCompany.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		462B0C892055432800072F3C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				468EBFFD2051681B0085BEF3 /* CompanyCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		462B0C8A2055432E00072F3C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		462B0C8C2055437000072F3C /* Employee */ = {
+			isa = PBXGroup;
+			children = (
+				462B0C8D2055438500072F3C /* View */,
+				4683219420495680003E1719 /* Controller */,
+			);
+			path = Employee;
+			sourceTree = "<group>";
+		};
+		462B0C8D2055438500072F3C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		464C55E42052D78500B87281 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -81,10 +133,10 @@
 		4683217D204945A5003E1719 /* IntermediateTraining */ = {
 			isa = PBXGroup;
 			children = (
+				46B881AB204C449000EB8872 /* CoreDataManager.swift */,
+				462B0C87205542F800072F3C /* Company */,
+				462B0C8C2055437000072F3C /* Employee */,
 				464C55E42052D78500B87281 /* Helpers */,
-				468321962049568D003E1719 /* Model */,
-				4683219520495689003E1719 /* View */,
-				4683219420495680003E1719 /* Controller */,
 				46832198204956A1003E1719 /* Supporting Files */,
 				4683218A204945A5003E1719 /* Info.plist */,
 			);
@@ -94,30 +146,10 @@
 		4683219420495680003E1719 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				46832180204945A5003E1719 /* CompaniesController.swift */,
-				46E3463120495B59003D60C9 /* CreateCompanyController.swift */,
-				46B881AB204C449000EB8872 /* CoreDataManager.swift */,
-				468EC001205174980085BEF3 /* CompaniesController+UITableView.swift */,
 				464C55E22052D33100B87281 /* EmployeesController.swift */,
 				46EA4A7D2052DA080051CF90 /* CreateEmployeeController.swift */,
-				468EBFFF205172910085BEF3 /* CompaniesController+CreateCompany.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		4683219520495689003E1719 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				468EBFFD2051681B0085BEF3 /* CompanyCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		468321962049568D003E1719 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		46832198204956A1003E1719 /* Supporting Files */ = {
