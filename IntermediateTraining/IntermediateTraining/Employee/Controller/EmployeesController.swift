@@ -16,7 +16,6 @@ class IndentedLabel: UILabel {
         let customRect = UIEdgeInsetsInsetRect(rect, insets)
         super.drawText(in: customRect)
     }
-    
 }
 
 class EmployeesController: UITableViewController, CreateEmployeeControllerDelegate {
