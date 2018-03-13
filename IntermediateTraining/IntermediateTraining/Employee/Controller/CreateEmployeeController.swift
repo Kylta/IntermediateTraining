@@ -16,6 +16,8 @@ class CreateEmployeeController: UIViewController {
     
     var delegate: CreateEmployeeControllerDelegate?
     
+    var company: Company?
+    
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Name"
@@ -49,8 +51,9 @@ class CreateEmployeeController: UIViewController {
     @objc private func handleSave() {
 
         guard let employeeName = nameTextField.text else { return }
+        guard let company = self.company else { return }
         
-        let tuple = CoreDataManager.shared.createEmployee(employeeName: employeeName)
+        let tuple = CoreDataManager.shared.createEmployee(employeeName: employeeName, company: company)
         
         if let error = tuple.1 {
             // is where you present an error modal of some kind
