@@ -32,6 +32,20 @@ class CreateEmployeeController: UIViewController {
         return textField
     }()
     
+    let birthdayLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Birthday"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let birthdayTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "MM/dd/yyyy"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,10 +56,14 @@ class CreateEmployeeController: UIViewController {
         setupCancelButton()
         setupSaveInNavBar(selector: #selector(handleSave))
         
-        _ = setupLightBlueBackgroundView(height: 50)
-        
         setupUI()
 
+    }
+    
+    private func showError(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
     
     @objc private func handleSave() {
@@ -53,7 +71,22 @@ class CreateEmployeeController: UIViewController {
         guard let employeeName = nameTextField.text else { return }
         guard let company = self.company else { return }
         
-        let tuple = CoreDataManager.shared.createEmployee(employeeName: employeeName, company: company)
+        guard let birthdayText = birthdayTextField.text else { return }
+        
+        if birthdayText.isEmpty {
+            showError(title: "Empty Birthday", message: "You have not entered a birthday")
+            return
+        }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        
+        guard let birthdayDate = dateFormatter.date(from: birthdayText) else {
+            showError(title: "Bad Date", message: "Birthday date entered not valid")
+            return
+        }
+        
+        let tuple = CoreDataManager.shared.createEmployee(employeeName: employeeName, birthday: birthdayDate, company: company)
         
         if let error = tuple.1 {
             // is where you present an error modal of some kind
@@ -68,6 +101,8 @@ class CreateEmployeeController: UIViewController {
     
     private func setupUI() {
         
+        _ = setupLightBlueBackgroundView(height: 100)
+        
         view.addSubview(nameLabel)
         nameLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         nameLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
@@ -79,6 +114,18 @@ class CreateEmployeeController: UIViewController {
         nameTextField.leftAnchor.constraint(equalTo: nameLabel.rightAnchor).isActive = true
         nameTextField.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         nameTextField.bottomAnchor.constraint(equalTo: nameLabel.bottomAnchor).isActive = true
+        
+        view.addSubview(birthdayLabel)
+        birthdayLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor).isActive = true
+        birthdayLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        birthdayLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        birthdayLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        view.addSubview(birthdayTextField)
+        birthdayTextField.topAnchor.constraint(equalTo: birthdayLabel.topAnchor).isActive = true
+        birthdayTextField.leftAnchor.constraint(equalTo: birthdayLabel.rightAnchor).isActive = true
+        birthdayTextField.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        birthdayTextField.bottomAnchor.constraint(equalTo: birthdayLabel.bottomAnchor).isActive = true
 
     }
 }
