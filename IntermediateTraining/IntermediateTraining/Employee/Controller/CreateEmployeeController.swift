@@ -47,7 +47,12 @@ class CreateEmployeeController: UIViewController {
     }()
     
     let employeeTypeSegmentedControl: UISegmentedControl = {
-        let types = ["Executive", "Senior Management", "Staff"]
+        let types = [
+            EmployeeType.Executive.rawValue,
+            EmployeeType.SeniorManagement.rawValue,
+            EmployeeType.Staff.rawValue,
+            EmployeeType.Intern.rawValue
+        ]
         let sc = UISegmentedControl(items: types)
         sc.selectedSegmentIndex = 0
         sc.tintColor = .darkBlue
@@ -96,8 +101,6 @@ class CreateEmployeeController: UIViewController {
         }
         
         guard let employeeType = employeeTypeSegmentedControl.titleForSegment(at: employeeTypeSegmentedControl.selectedSegmentIndex) else { return }
-        
-        print(employeeType)
         
         let tuple = CoreDataManager.shared.createEmployee(employeeName: employeeName, employeeType: employeeType, birthday: birthdayDate, company: company)
         
