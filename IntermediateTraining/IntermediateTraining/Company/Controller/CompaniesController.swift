@@ -22,7 +22,7 @@ class CompaniesController: UITableViewController {
 
         navigationItem.leftBarButtonItems = [
             UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset)),
-            UIBarButtonItem(title: "Do Updates", style: .plain, target: self, action: #selector(doUpdates))
+            UIBarButtonItem(title: "Do Updates", style: .plain, target: self, action: #selector(doNestedUpdates))
         ]
         
         navigationItem.title = "Companies"
@@ -33,6 +33,59 @@ class CompaniesController: UITableViewController {
         tableView.separatorColor = .white
         tableView.register(CompanyCell.self, forCellReuseIdentifier: cellId)
 
+    }
+    
+    @objc private func doNestedUpdates() {
+        print("Trying to perfom nested updates now")
+        
+        DispatchQueue.global(qos: .background).async {
+            
+            let privateContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+            
+            privateContext.parent = CoreDataManager.shared.persistentContrainer.viewContext
+            
+            let request: NSFetchRequest<Company> = Company.fetchRequest()
+            request.fetchLimit = 1
+            
+            do {
+                
+                let companies = try privateContext.fetch(request)
+                
+                companies.forEach({ (company) in
+                    print(company.name ?? "")
+                    company.name = "F: \(company.name ?? "")"
+                })
+                
+                do {
+                    try privateContext.save()
+                    
+                    DispatchQueue.main.async {
+                        
+                        do {
+                            let context = CoreDataManager.shared.persistentContrainer.viewContext
+                            
+                            if context.hasChanges {
+                                try context.save()
+                            }
+                            
+                            self.tableView.reloadData()
+                            
+                        } catch let finalSaveErr {
+                            print("Failed to save main context:", finalSaveErr)
+                        }
+                        
+                    }
+                    
+                } catch let saveErr {
+                    print("Failed to save on private context:", saveErr)
+                }
+                
+            } catch let fetchErr {
+                print("Failed to fetch on private context:", fetchErr)
+            }
+            
+        }
+        
     }
     
     @objc private func doUpdates() {
