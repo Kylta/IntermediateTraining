@@ -21,9 +21,6 @@ class IndentedLabel: UILabel {
 class EmployeesController: UITableViewController, CreateEmployeeControllerDelegate {
     
     func didAddEmployee(employee: Employee) {
-        //        employees.append(employee)
-//        fetchEmployee()
-//        tableView.reloadData()
         
         guard let section = employeeTypes.index(of: employee.type!) else { return }
         let row = allEmployees[section].count
@@ -96,14 +93,7 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = IndentedLabel()
-        
-//        if section == 0 {
-//            label.text = EmployeeType.Executive.rawValue
-//        } else if section == 1 {
-//            label.text = EmployeeType.SeniorManagement.rawValue
-//        } else {
-//            label.text = EmployeeType.Staff.rawValue
-//        }
+
         label.text = employeeTypes[section]
         
         label.textColor = .darkBlue
@@ -128,19 +118,6 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
                 companyEmployees.filter {$0.type == employeeType }
             )
         }
-        
-        //        let executives = companyEmployees.filter { (employee) -> Bool in
-        //            employee.type == EmployeeType.Executive.rawValue
-        //        }
-        //
-        //        let seniorManagement = companyEmployees.filter { $0.type == EmployeeType.SeniorManagement.rawValue }
-        //
-        //        allEmployees = [
-        //            executives,
-        //            seniorManagement,
-        //            companyEmployees.filter { $0.type == EmployeeType.Staff.rawValue }
-        //        ]
-        
     }
     
     @objc private func handleAdd() {
