@@ -86,7 +86,7 @@ class CompaniesAutoUpdateController: UITableViewController, NSFetchedResultsCont
         
         let request: NSFetchRequest<Company> = Company.fetchRequest()
         
-        request.predicate = NSPredicate(format: "name CONTAINS %@", "B")
+//        request.predicate = NSPredicate(format: "name CONTAINS %@", "B")
         
         let context = CoreDataManager.shared.persistentContrainer.viewContext
         
@@ -111,9 +111,14 @@ class CompaniesAutoUpdateController: UITableViewController, NSFetchedResultsCont
         tableView.backgroundColor = UIColor.darkBlue
         tableView.register(CompanyCell.self, forCellReuseIdentifier: cellId)
         
-        fetchedResultsController.fetchedObjects?.forEach({ (company) in
-            print(company.name ?? "")
-        })
+//        fetchedResultsController.fetchedObjects?.forEach({ (company) in
+//            print(company.name ?? "")
+//        })
+        
+//        let service = Service()
+//        service.downloadCompaniesFromServer()
+
+        Service.shared.downloadCompaniesFromServer()
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

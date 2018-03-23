@@ -19,6 +19,9 @@
 		468EBFFE2051681B0085BEF3 /* CompanyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468EBFFD2051681B0085BEF3 /* CompanyCell.swift */; };
 		468EC000205172910085BEF3 /* CompaniesController+CreateCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468EBFFF205172910085BEF3 /* CompaniesController+CreateCompany.swift */; };
 		468EC002205174980085BEF3 /* CompaniesController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468EC001205174980085BEF3 /* CompaniesController+UITableView.swift */; };
+		469D7DA420652D4E0049F6C4 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469D7DA320652D4E0049F6C4 /* Service.swift */; };
+		469D7DA6206544AA0049F6C4 /* JSONCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469D7DA5206544AA0049F6C4 /* JSONCompany.swift */; };
+		469D7DA9206546D00049F6C4 /* JSONEmployee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469D7DA8206546D00049F6C4 /* JSONEmployee.swift */; };
 		46AC9D0C20581AA400DE3120 /* EmployeeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AC9D0B20581AA400DE3120 /* EmployeeType.swift */; };
 		46B881AC204C449000EB8872 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B881AB204C449000EB8872 /* CoreDataManager.swift */; };
 		46E3463220495B59003D60C9 /* CreateCompanyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E3463120495B59003D60C9 /* CreateCompanyController.swift */; };
@@ -40,6 +43,9 @@
 		468EBFFD2051681B0085BEF3 /* CompanyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCell.swift; sourceTree = "<group>"; };
 		468EBFFF205172910085BEF3 /* CompaniesController+CreateCompany.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompaniesController+CreateCompany.swift"; sourceTree = "<group>"; };
 		468EC001205174980085BEF3 /* CompaniesController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompaniesController+UITableView.swift"; sourceTree = "<group>"; };
+		469D7DA320652D4E0049F6C4 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		469D7DA5206544AA0049F6C4 /* JSONCompany.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCompany.swift; sourceTree = "<group>"; };
+		469D7DA8206546D00049F6C4 /* JSONEmployee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONEmployee.swift; sourceTree = "<group>"; };
 		46AC9D0B20581AA400DE3120 /* EmployeeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeType.swift; sourceTree = "<group>"; };
 		46B881AB204C449000EB8872 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		46E3463120495B59003D60C9 /* CreateCompanyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyController.swift; sourceTree = "<group>"; };
@@ -90,6 +96,8 @@
 		462B0C8A2055432E00072F3C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				469D7DA320652D4E0049F6C4 /* Service.swift */,
+				469D7DA5206544AA0049F6C4 /* JSONCompany.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -97,6 +105,7 @@
 		462B0C8C2055437000072F3C /* Employee */ = {
 			isa = PBXGroup;
 			children = (
+				469D7DA7206546C80049F6C4 /* Model */,
 				462B0C8D2055438500072F3C /* View */,
 				4683219420495680003E1719 /* Controller */,
 			);
@@ -167,6 +176,14 @@
 				46681CF5204C0905009547B3 /* IntermediateTrainingModels.xcdatamodeld */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		469D7DA7206546C80049F6C4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				469D7DA8206546D00049F6C4 /* JSONEmployee.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +259,7 @@
 			files = (
 				464C55E32052D33100B87281 /* EmployeesController.swift in Sources */,
 				468EC000205172910085BEF3 /* CompaniesController+CreateCompany.swift in Sources */,
+				469D7DA420652D4E0049F6C4 /* Service.swift in Sources */,
 				46832181204945A5003E1719 /* CompaniesController.swift in Sources */,
 				4683219320494D93003E1719 /* UIColor+theme.swift in Sources */,
 				464C55E62052D7A500B87281 /* UIViewController+Helpers.swift in Sources */,
@@ -251,7 +269,9 @@
 				468EC002205174980085BEF3 /* CompaniesController+UITableView.swift in Sources */,
 				4683217F204945A5003E1719 /* AppDelegate.swift in Sources */,
 				46681CF7204C0905009547B3 /* IntermediateTrainingModels.xcdatamodeld in Sources */,
+				469D7DA9206546D00049F6C4 /* JSONEmployee.swift in Sources */,
 				466DD1BD2063B620003FDC29 /* CompaniesAutoUpdateController.swift in Sources */,
+				469D7DA6206544AA0049F6C4 /* JSONCompany.swift in Sources */,
 				46B881AC204C449000EB8872 /* CoreDataManager.swift in Sources */,
 				46AC9D0C20581AA400DE3120 /* EmployeeType.swift in Sources */,
 			);
