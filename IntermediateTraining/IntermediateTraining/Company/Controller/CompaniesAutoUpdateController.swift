@@ -110,15 +110,19 @@ class CompaniesAutoUpdateController: UITableViewController, NSFetchedResultsCont
         
         tableView.backgroundColor = UIColor.darkBlue
         tableView.register(CompanyCell.self, forCellReuseIdentifier: cellId)
-        
-//        fetchedResultsController.fetchedObjects?.forEach({ (company) in
-//            print(company.name ?? "")
-//        })
-        
-//        let service = Service()
-//        service.downloadCompaniesFromServer()
 
+//        Service.shared.downloadCompaniesFromServer()
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        refreshControl.tintColor = .white
+        
+        self.refreshControl = refreshControl
+    }
+    
+    @objc private func handleRefresh() {
         Service.shared.downloadCompaniesFromServer()
+        refreshControl?.endRefreshing()
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -156,6 +160,14 @@ class CompaniesAutoUpdateController: UITableViewController, NSFetchedResultsCont
         cell.company = company
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let employeeListController = EmployeesController()
+        employeeListController.company = fetchedResultsController.object(at: indexPath)
+        
+        navigationController?.pushViewController(employeeListController, animated: true)
     }
     
 }
